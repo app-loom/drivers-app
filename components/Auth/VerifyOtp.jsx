@@ -26,66 +26,50 @@ export default function VerifyOtp({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Verify Code</Text>
-                <Text style={styles.subtitle}>
-                    Please enter the code we just sent to your mobile number
-                    xxxxx-xxxxx
-                </Text>
-            </View>
+        <SafeAreaView className="auth-container">
+            <View className="px-6">
+                <View className="items-center">
+                    <Text className="text-2xl text-gray-800 font-interSemiBold">
+                        Verify Code
+                    </Text>
+                    <Text className="px-6 mb-5 text-center text-gray-500">
+                        Please enter the code we just sent to your mobile number
+                        xxxxx-xxxxx
+                    </Text>
+                </View>
 
-            <View style={styles.otpContainer}>
-                {otp.map((digit, index) => (
-                    <TextInput
-                        key={index}
-                        style={styles.otpInput}
-                        keyboardType="number-pad"
-                        maxLength={1}
-                        value={digit}
-                        onChangeText={(value) => handleChange(value, index)}
-                    />
-                ))}
-            </View>
+                <View style={styles.otpContainer}>
+                    {otp.map((digit, index) => (
+                        <TextInput
+                            key={index}
+                            style={styles.otpInput}
+                            keyboardType="number-pad"
+                            maxLength={1}
+                            value={digit}
+                            onChangeText={(value) => handleChange(value, index)}
+                        />
+                    ))}
+                </View>
 
-            <View style={styles.resendContainer}>
-                <Text style={styles.resendText}>Didn't receive OTP? </Text>
-                <Text style={styles.resendLink} onPress={handleResend}>
-                    Resend Code
-                </Text>
-            </View>
+                <View style={styles.resendContainer}>
+                    <Text style={styles.resendText}>Didn't receive OTP? </Text>
+                    <Text style={styles.resendLink} onPress={handleResend}>
+                        Resend Code
+                    </Text>
+                </View>
 
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("complete-profile")}
-            >
-                <Text style={styles.buttonText}>Verify</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    className="btn-primary"
+                    onPress={() => navigation.navigate("complete-profile")}
+                >
+                    <Text className="btn-text">Verify</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        justifyContent: "center",
-        backgroundColor: "#fff",
-    },
-    header: {
-        marginBottom: 40,
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: "bold",
-        marginBottom: 10,
-    },
-    subtitle: {
-        fontSize: 16,
-        textAlign: "center",
-        color: "#555",
-    },
     otpContainer: {
         flexDirection: "row",
         justifyContent: "center",
@@ -115,16 +99,5 @@ const styles = StyleSheet.create({
         color: "#555",
         fontWeight: "bold",
         textDecorationLine: "underline",
-    },
-    button: {
-        backgroundColor: "#FFAC1C",
-        paddingVertical: 15,
-        borderRadius: 25,
-        alignItems: "center",
-    },
-    buttonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
     },
 });

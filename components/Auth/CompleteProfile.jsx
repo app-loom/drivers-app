@@ -30,101 +30,100 @@ export default function CompleteProfile({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Complete Your Profile</Text>
-                <Text style={styles.subtitle}>
-                    Don't worry, only you can see your personal data. No one
-                    else will be able to see it.
-                </Text>
-            </View>
-
-            <View style={styles.form}>
-                <TextInput
-                    placeholder="Name"
-                    autoCapitalize="words"
-                    style={styles.input}
-                    value={name}
-                    onChangeText={setName}
-                />
-                <TextInput
-                    placeholder="Email"
-                    autoCapitalize="none"
-                    keyboardType="email-address"
-                    style={styles.input}
-                    value={email}
-                    onChangeText={setEmail}
-                />
-
-                <Picker
-                    selectedValue={gender}
-                    onValueChange={(itemValue) => setGender(itemValue)}
-                    style={styles.picker}
-                >
-                    <Picker.Item style={{}} label="Select Gender" value="" />
-                    <Picker.Item style={{}} label="Male" value="male" />
-                    <Picker.Item style={{}} label="Female" value="female" />
-                    <Picker.Item style={{}} label="Other" value="other" />
-                </Picker>
-
-                <Picker
-                    selectedValue={city}
-                    onValueChange={(itemValue) => setCity(itemValue)}
-                    style={styles.picker}
-                >
-                    <Picker.Item label="Select City" value="" />
-                    <Picker.Item label="City 1" value="City 1" />
-                    <Picker.Item label="City 2" value="City 2" />
-                    <Picker.Item label="City 3" value="City 3" />
-                </Picker>
-
-                <View style={styles.checkboxContainer}>
-                    <Checkbox
-                        isChecked={accepted}
-                        onPress={(isChecked) => setAccepted(isChecked)}
-                        text="I agree to the Terms & Conditions"
-                        fillColor="#FFAC1C"
-                        textStyle={styles.checkboxText}
-                    />
-                    <Text>
-                        By Accept, you agree to company
-                        <Text style={styles.terms}>Terms & Condition</Text>
+        <SafeAreaView className="auth-container">
+            <View className="px-6">
+                <View className="mb-4 space-y-1">
+                    <Text className="text-2xl text-center font-interSemiBold">
+                        Complete Your Profile
+                    </Text>
+                    <Text className="text-xs text-center text-gray-400 font-interRegular">
+                        Don't worry, only you can see your personal data. No one
+                        else will be able to see it.
                     </Text>
                 </View>
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("set-profile-pic")}
-                >
-                    <Text style={styles.buttonText}>Continue</Text>
-                </TouchableOpacity>
+                <View>
+                    <View className="space-y-3" >
+                        <TextInput
+                            placeholder="Name"
+                            autoCapitalize="words"
+                            className="text-gray-400 font-interRegular field-input"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                        <TextInput
+                            placeholder="Email"
+                            autoCapitalize="none"
+                            keyboardType="email-address"
+                            className="text-gray-400 font-interRegular field-input"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
+
+                        <Picker
+                            selectedValue={gender}
+                            onValueChange={(itemValue) => setGender(itemValue)}
+                            style={styles.picker}
+                        >
+                            <Picker.Item
+                                style={{}}
+                                label="Select Gender"
+                                value=""
+                            />
+                            <Picker.Item style={{}} label="Male" value="male" />
+                            <Picker.Item
+                                style={{}}
+                                label="Female"
+                                value="female"
+                            />
+                            <Picker.Item
+                                style={{}}
+                                label="Other"
+                                value="other"
+                            />
+                        </Picker>
+
+                        <Picker
+                            selectedValue={city}
+                            onValueChange={(itemValue) => setCity(itemValue)}
+                            style={styles.picker}
+                        >
+                            <Picker.Item label="Select City" value="" />
+                            <Picker.Item label="City 1" value="City 1" />
+                            <Picker.Item label="City 2" value="City 2" />
+                            <Picker.Item label="City 3" value="City 3" />
+                        </Picker>
+
+                        <View style={styles.checkboxContainer} className="py-4" >
+                            <Checkbox
+                                isChecked={accepted}
+                                onPress={(isChecked) => setAccepted(isChecked)}
+                                text="I agree to the Terms & Conditions"
+                                fillColor="#FFAC1C"
+                                textStyle={styles.checkboxText}
+                            />
+                            <Text>
+                                By Accept, you agree to company
+                                <Text style={styles.terms}>
+                                    Terms & Condition
+                                </Text>
+                            </Text>
+                        </View>
+                    </View>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("set-profile-pic")}
+                    >
+                        <Text style={styles.buttonText}>Continue</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: "#fff",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    header: {
-        marginBottom: 30,
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold",
-        marginBottom: 10,
-        textAlign: "center",
-    },
-    subtitle: {
-        fontSize: 14,
-        color: "#555",
-        textAlign: "center",
-    },
     form: {
         width: "100%",
     },
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 15,
         justifyContent: "center",
-        fontFamily: "Inter_400Regular",
         color: "#817E7E",
     },
     checkboxContainer: {

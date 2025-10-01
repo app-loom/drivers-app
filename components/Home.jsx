@@ -1,69 +1,50 @@
-import {
-    Inter_400Regular,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    useFonts,
-} from "@expo-google-fonts/inter";
 import React from "react";
-import {
-    ImageBackground,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 export default function Home({ navigation }) {
-    const [fontsLoaded] = useFonts({
-        Inter_400Regular,
-        Inter_600SemiBold,
-        Inter_700Bold,
-    });
-
-    if (!fontsLoaded) {
-        return null;
-    }
     return (
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
+        <View className="h-full">
+            <View className="min-h-80">
                 <ImageBackground
                     source={{
                         uri: "https://images.pexels.com/photos/5835281/pexels-photo-5835281.jpeg",
                     }}
-                    style={styles.image}
+                    className="items-center justify-center h-full "
                     resizeMode="cover"
                 ></ImageBackground>
             </View>
 
-            <View style={styles.contentContainer}>
-                <Text style={styles.heading}>
+            <View className="items-center justify-center p-10 space-y-3 ">
+                <Text className="text-2xl text-center text-gray-800 font-interSemiBold">
                     <Text style={{ color: "#FFAC1C" }}>Earn Money</Text> With
                     This Driver App
                 </Text>
 
-                <Text style={styles.description}>
+                <Text className="mb-5 text-center text-gray-500 text-md font-interRegular px-15">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Expedita dolorum ut sit, maxime molestiae minus
                 </Text>
 
                 <TouchableOpacity
-                    style={styles.button}
+                    className="px-8 py-3 rounded-full bg-primary"
                     onPress={() => {
                         navigation.navigate("sign-up");
                     }}
                 >
-                    <Text style={styles.buttonText}>Let's Get Started</Text>
+                    <Text className="text-sm text-white font-interSemiBold">
+                        Let's Get Started
+                    </Text>
                 </TouchableOpacity>
 
-                <Text style={styles.signInText}>
+                <Text className="text-sm text-gray-500 font-interRegular">
                     Already have an account?{" "}
                     <Text
                         onPress={() => navigation.navigate("sign-in")}
                         style={{
                             textDecorationLine: "underline",
                             textDecorationStyle: "solid",
-                            color: "#4294EB",
                         }}
+                        className="text-link"
                     >
                         Sign in
                     </Text>
@@ -72,57 +53,3 @@ export default function Home({ navigation }) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    imageContainer: {
-        flex: 1,
-    },
-    heading: {
-        fontSize: 22,
-        fontFamily: "Inter_700Bold",
-        fontWeight: "bold",
-        textAlign: "center",
-        marginBottom: 10,
-        width: 250,
-    },
-    image: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    contentContainer: {
-        flex: 1,
-        padding: 20,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    description: {
-        fontSize: 14,
-        textAlign: "center",
-        fontFamily: "Inter_400Regular",
-        marginBottom: 20,
-        paddingInline: 15,
-    },
-    button: {
-        backgroundColor: "#FFAC1C",
-        paddingBlock: 10,
-        paddingInline: 10,
-        borderRadius: 25,
-        marginBottom: 15,
-        alignItems: "center",
-        width: 300,
-    },
-    buttonText: {
-        fontFamily: "Inter_600SemiBold",
-        fontWeight: "semibold",
-        color: "#fff",
-        fontSize: 15,
-    },
-    signInText: {
-        fontFamily: "Inter_400Regular",
-        fontSize: 15,
-    },
-});

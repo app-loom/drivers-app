@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply px-8 py-3 rounded-full bg-primary;
+    }
+
+    .btn-text {
+        @apply text-sm text-white font-interSemiBold text-center;
+    }
+
+    .auth-container {
+        @apply justify-center h-full
+    }
+
+    .field-input {
+        @apply w-full h-10 border border-gray-300 rounded-lg px-4;
+    }
+}
