@@ -6,7 +6,6 @@ import {
 } from "@expo-google-fonts/inter";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import "react-native-reanimated";
 import "./global.css";
 
 export const unstable_settings = {

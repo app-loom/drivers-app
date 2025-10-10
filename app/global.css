@@ -4,11 +4,19 @@
 
 @layer components {
     .btn-primary {
-        @apply px-8 py-3 rounded-full bg-primary;
+        @apply px-10 py-4 rounded-full bg-primary;
+    }
+
+    .btn-secondary {
+      @apply  rounded-full border border-primary;
     }
 
     .btn-text {
-        @apply text-sm text-white font-interSemiBold text-center;
+        @apply text-xl text-white font-interSemiBold text-center;
+    }
+
+    .btn-text-secondary {
+        @apply text-xl text-primary font-interSemiBold text-center;
     }
 
     .auth-container {
@@ -16,6 +24,6 @@
     }
 
     .field-input {
-        @apply w-full h-10 border border-gray-300 rounded-lg px-4;
+        @apply w-full h-14 border border-gray-300 rounded-lg px-4 text-xl text-gray-500 font-interRegular;
     }
 }

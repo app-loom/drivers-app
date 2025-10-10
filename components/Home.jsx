@@ -1,55 +1,49 @@
 import React from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home({ navigation }) {
     return (
-        <View className="h-full">
-            <View className="min-h-80">
+        <SafeAreaView className="flex-1 bg-white">
+            <View className="flex-1">
                 <ImageBackground
                     source={{
                         uri: "https://images.pexels.com/photos/5835281/pexels-photo-5835281.jpeg",
                     }}
-                    className="items-center justify-center h-full "
+                    className="w-full h-full"
                     resizeMode="cover"
-                ></ImageBackground>
+                />
             </View>
 
-            <View className="items-center justify-center p-10 space-y-3 ">
-                <Text className="text-2xl text-center text-gray-800 font-interSemiBold">
-                    <Text style={{ color: "#FFAC1C" }}>Earn Money</Text> With
-                    This Driver App
+            <View className="items-center justify-center flex-1 gap-6 p-6">
+                <Text className="text-5xl leading-snug text-center text-gray-800 font-interBold">
+                    <Text style={{ color: "#FFAC1C" }}>Earn Money</Text> With This Driver App
                 </Text>
 
-                <Text className="mb-5 text-center text-gray-500 text-md font-interRegular px-15">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Expedita dolorum ut sit, maxime molestiae minus
+                <Text className="px-4 text-xl text-center text-gray-500 font-interRegular">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita dolorum ut sit, maxime molestiae minus
                 </Text>
 
                 <TouchableOpacity
-                    className="px-8 py-3 rounded-full bg-primary"
-                    onPress={() => {
-                        navigation.navigate("sign-up");
-                    }}
+                    className="btn-primary"
+                    onPress={() => navigation.navigate("sign-up")}
                 >
-                    <Text className="text-sm text-white font-interSemiBold">
+                    <Text className="btn-text">
                         Let's Get Started
                     </Text>
                 </TouchableOpacity>
 
-                <Text className="text-sm text-gray-500 font-interRegular">
+                <Text className="text-xl text-gray-500 font-interRegular">
                     Already have an account?{" "}
                     <Text
                         onPress={() => navigation.navigate("sign-in")}
-                        style={{
-                            textDecorationLine: "underline",
-                            textDecorationStyle: "solid",
-                        }}
+                        style={{ textDecorationLine: "underline", textDecorationStyle: "solid" }}
                         className="text-link"
                     >
                         Sign in
                     </Text>
                 </Text>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }

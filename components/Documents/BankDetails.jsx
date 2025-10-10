@@ -17,7 +17,7 @@ export default function BankDetails({ navigation }) {
         }
 
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            mediaTypes: 'images',
             allowsEditing: true,
             aspect: [1, 1],
             quality: 0.7,
@@ -29,21 +29,21 @@ export default function BankDetails({ navigation }) {
     };
 
     return (
-        <SafeAreaView className="flex-1">
-            <View className="flex-1 px-4 py-5 space-y-2">
-                <View>
-                    <Text className="text-xl text-center text-gray-800 font-interSemiBold">
+        <SafeAreaView className="flex-1 bg-white">
+            <View className="flex-1 gap-3 px-4 py-5">
+                <View className="p-5 pt-10" >
+                    <Text className="text-4xl text-center text-gray-800 font-interSemiBold">
                         Bank Account Details
                     </Text>
                 </View>
-                <View className="pt-3 space-y-3">
+                <View className="gap-3 px-4">
                     <View className="flex-row gap-2">
                         <Ionicons
                             name="checkmark-circle"
                             size={24}
                             color="#FFAC1C"
-                        />{" "}
-                        <Text className="text-gray-600 font-interRegular">
+                        />
+                        <Text className="text-xl text-gray-600 font-interRegular">
                             Photo copies and printouts of documnets will not be
                             accepted.
                         </Text>
@@ -53,8 +53,8 @@ export default function BankDetails({ navigation }) {
                             name="checkmark-circle"
                             size={24}
                             color="#FFAC1C"
-                        />{" "}
-                        <Text className="text-gray-600 font-interRegular">
+                        />
+                        <Text className="text-xl text-gray-600 font-interRegular">
                             The photo and all the details must be clearly
                             visible.
                         </Text>
@@ -64,22 +64,22 @@ export default function BankDetails({ navigation }) {
                             name="checkmark-circle"
                             size={24}
                             color="#FFAC1C"
-                        />{" "}
-                        <Text className="text-gray-600 font-interRegular">
+                        />
+                        <Text className="text-xl text-gray-600 font-interRegular">
                             Only the documents that are less than 10MB in size
                             and in JPG, JPEG, PNG, or PDF format will be
                             accepted.
                         </Text>
                     </View>
                 </View>
-                <View className="pt-10">
+                <View className="items-center justify-center flex-1 item">
                     <View className="items-center mb-10">
                         <TouchableOpacity
-                            className="flex items-center justify-center h-24 px-5 py-2 border border-gray-400 rounded-lg w-60"
+                            className="flex items-center justify-center px-5 py-2 border border-gray-400 rounded-lg h-52 w-80"
                             style={{ borderStyle: "dashed", borderWidth: 2 }}
                             onPress={pickImage}
                         >
-                            <Text className="text-sm text-gray-500 font-interRegular">
+                            <Text className="text-xl text-gray-500 font-interRegular">
                                 Choose Document
                             </Text>
                         </TouchableOpacity>
@@ -88,7 +88,7 @@ export default function BankDetails({ navigation }) {
                                 <View>
                                     <Image
                                         source={{ uri: image }}
-                                        className="w-24 h-24 p-6 border border-gray-300 rounded-md"
+                                        className="p-6 border border-gray-300 rounded-md h-44 w-44"
                                     />
                                     <Ionicons
                                         name="close-circle"
