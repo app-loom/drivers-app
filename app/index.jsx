@@ -15,86 +15,29 @@ import FindRide from "@/components/FindRide";
 import Profile from "@/components/Profile";
 import CustomerOtp from "@/components/ui/CustomerInteractions/CustomerOtp";
 import Payment from "@/components/ui/CustomerInteractions/Payment";
+import DashboardTabs from "@/components/Tabs/DashboardTabs";
 
 const Stack = createNativeStackNavigator();
 
 export default function Index() {
     return (
-        <Stack.Navigator>
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="Home"
-                component={Home}
-            />
-            <Stack.Screen
-                name="sign-in"
-                options={{ headerShown: false }}
-                component={SignIn}
-            />
-            <Stack.Screen
-                name="sign-up"
-                options={{ headerShown: false }}
-                component={SignUp}
-            />
-            <Stack.Screen
-                name="verify-otp"
-                options={{ headerShown: false }}
-                component={VerifyOtp}
-            />
-            <Stack.Screen
-                name="complete-profile"
-                options={{ headerShown: false }}
-                component={CompleteProfile}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="set-profile-pic"
-                component={SetProfilePicture}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="add-bank-details"
-                component={BankDetails}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="add-driving-license"
-                component={DrivingLicense}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="submit-application"
-                component={Submit}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="find-ride"
-                component={FindRide}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="profile"
-                component={Profile}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="customer-otp"
-                component={CustomerOtp}
-            />
-            <Stack.Screen
-                options={{ headerShown: false }}
-                name="payment"
-                component={Payment}
-            />
-        </Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="sign-in" component={SignIn} />
+        <Stack.Screen name="sign-up" component={SignUp} />
+        <Stack.Screen name="verify-otp" component={VerifyOtp} />
+        <Stack.Screen name="complete-profile" component={CompleteProfile} />
+        <Stack.Screen name="set-profile-pic" component={SetProfilePicture} />
+        <Stack.Screen name="add-bank-details" component={BankDetails} />
+        <Stack.Screen name="add-driving-license" component={DrivingLicense} />
+        <Stack.Screen name="submit-application" component={Submit} />
+        <Stack.Screen name="customer-otp" component={CustomerOtp} />
+        <Stack.Screen name="payment" component={Payment} />
+        <Stack.Screen name="dashboard" component={DashboardTabs} />
+      </Stack.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#fff",
-    },
-});

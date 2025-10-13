@@ -2,7 +2,8 @@ import { useUserStore } from "@/store/user.store";
 import React from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { detailedMapStyle } from "@/constants/data";
 
 export default function DragableMap({ location, loading, fetchLocation }) {
   const isLocationEnabled = useUserStore((state) => state.isLocationEnabled);
@@ -20,7 +21,7 @@ export default function DragableMap({ location, loading, fetchLocation }) {
   }
 
   return (
-    <View className="flex-1 overflow-hidden border border-gray-200 rounded-2xl">
+    <View className="flex-1 px-4 pb-4 overflow-hidden border border-gray-200 rounded-2xl">
       {loading ? (
         <View className="items-center justify-center flex-1">
           <ActivityIndicator size="large" color="#FFAC1C" />
@@ -35,6 +36,7 @@ export default function DragableMap({ location, loading, fetchLocation }) {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
+          customMapStyle={detailedMapStyle}
           showsUserLocation={true}
           showsMyLocationButton={true}
         >

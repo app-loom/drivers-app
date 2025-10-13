@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-// import {} from 'firebase/auth'
+import { BASE_URL } from "@/constants/data";
 
 export default function SignUp({ navigation }) {
   const setUserDetails = useUserStore((state) => state.setUserDetails);
@@ -41,8 +41,9 @@ export default function SignUp({ navigation }) {
       password,
     };
     const config = {};
+
     axios
-      .post(`http://localhost:5000/user/register`, bodyTxt, config)
+      .post(`${BASE_URL}/user/register`, bodyTxt, config)
       .then((res) => {
         if (res.data.success) {
           setUserDetails(res.data.data);
@@ -68,14 +69,6 @@ export default function SignUp({ navigation }) {
       });
   };
 
-  // const signUp = async () => {
-  //   try {
-  //     const user = await createUserWithEmailAndPassword()
-  //   } catch (error) {
-      
-  //   }
-  // }
-  
   return (
     <SafeAreaView className="bg-white auth-container">
       <Toast />
@@ -93,8 +86,8 @@ export default function SignUp({ navigation }) {
         </View>
         <TouchableOpacity
           className="my-5 btn-primary"
-          // onPress={() => handleSignUp()}
-          onPress={() => navigation.navigate("verify-otp")}
+          onPress={() => handleSignUp()}
+          // onPress={() => navigation.navigate("verify-otp")}
           // onPress={signUp}
         >
           <Text className="btn-text">{isLoading ? "Creating your account..." : "Sign Up"}</Text>

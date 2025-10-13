@@ -1,22 +1,22 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import * as Location from 'expo-location';
-import React, { useEffect, useState } from 'react';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import * as Location from "expo-location";
+import React, { useEffect, useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Navbar from './Navbar';
-import DragableMap from './ui/DragableMap';
-import { useUserStore } from '@/store/user.store';
-import ArrivalInfo from './ui/CustomerInteractions/ArrivalInfo';
+import { SafeAreaView } from "react-native-safe-area-context";
+import Navbar from "./Navbar";
+import DragableMap from "./ui/DragableMap";
+import { useUserStore } from "@/store/user.store";
+import ArrivalInfo from "./ui/CustomerInteractions/ArrivalInfo";
 
-export default function FindRide({navigation}) {
-  const setIsLocationEnabled = useUserStore((state) => state.setIsLocationEnabled)
+export default function FindRide({ navigation }) {
+  const setIsLocationEnabled = useUserStore((state) => state.setIsLocationEnabled);
 
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [openAvailRides, setOpenAvailRides] = useState(false);
   const [openArrivalInfo, setOpenArrivalInfo] = useState(false);
 
-   const fetchLocation = async () => {
+  const fetchLocation = async () => {
     setLoading(true);
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -42,16 +42,16 @@ export default function FindRide({navigation}) {
   }, []);
 
   const pickup1 = {
-  customerName: "Tester",
-  pickup: "New Bustand, Thanjavur",
-  drop: "Verti E-Square, Thanjavur",
-  fare: "₹ 180",
-  distance: "5.2 km",
-};
+    customerName: "Tester",
+    pickup: "New Bustand, Thanjavur",
+    drop: "Verti E-Square, Thanjavur",
+    fare: "₹ 180",
+    distance: "5.2 km",
+  };
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="gap-5 p-4 ">
+      <View className="gap-5 p-4">
         <Navbar navigation={navigation} />
 
         <View className="flex-row items-center justify-between p-5 bg-white border border-gray-200 rounded-2xl">
@@ -64,7 +64,7 @@ export default function FindRide({navigation}) {
       </View>
 
       <DragableMap loading={loading} location={location} fetchLocation={fetchLocation} />
-      <View className="p-4">
+      <View className="px-4 pt-5">
         <TouchableOpacity className="btn-primary" onPress={() => setOpenAvailRides(true)}>
           <Text className="btn-text">Find a Ride</Text>
         </TouchableOpacity>
@@ -112,11 +112,7 @@ export default function FindRide({navigation}) {
         </View>
       </Modal>
 
-      <ArrivalInfo
-        visible={openArrivalInfo}
-        onClose={() => setOpenArrivalInfo(false)}
-        navigation={navigation}
-      />
+      <ArrivalInfo visible={openArrivalInfo} onClose={() => setOpenArrivalInfo(false)} navigation={navigation} />
     </SafeAreaView>
   );
 }
