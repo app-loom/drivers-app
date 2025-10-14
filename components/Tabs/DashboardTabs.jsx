@@ -1,15 +1,19 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { View, Text } from "react-native";
 
 import Profile from "@/components/Profile";
 import Rides from "@/components/Rides";
 import FindRide from "@/components/FindRide";
+import Notifications from "@/components/Notifications";
 
 const Tabs = createBottomTabNavigator();
 
-const TabIcon = ({ name, label, focused, color, size }) => {
+const TabIcon = ({ iconLibrary, name, label, focused, color, size }) => {
+  const IconComponent = iconLibrary === "material" ? MaterialIcons : Ionicons;
+
   return (
     <View
       style={{
@@ -18,10 +22,10 @@ const TabIcon = ({ name, label, focused, color, size }) => {
         justifyContent: "center",
         minWidth: 70,
         paddingHorizontal: 4,
-        transform: [{ scale: focused ? 1.1 : 1 }],
+        // transform: [{ scale: focused ? 1.1 : 1 }],
       }}
     >
-      <Ionicons name={name} size={focused ? size + 3 : size} color={color} />
+      <IconComponent name={name} size={size} color={color} />
       <Text
         style={{
           fontSize: 12,
@@ -54,14 +58,14 @@ export default function DashboardTabs() {
           shadowOpacity: 0.1,
           shadowOffset: { width: 0, height: -1 },
           shadowRadius: 5,
-          borderRadius: 50,
+          // borderRadius: 50,
           alignItems: "center",
           justifyContent: "center",
         },
-
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = "";
           let label = "";
+          let iconLibrary = "ion";
 
           switch (route.name) {
             case "find-ride":
@@ -69,8 +73,13 @@ export default function DashboardTabs() {
               label = "Find Ride";
               break;
             case "rides":
-              iconName = focused ? "list" : "list-outline";
+              iconName = "history";
               label = "Rides";
+              iconLibrary = "material";
+              break;
+            case "notifications":
+              iconName = focused ? 'notifications' :  "notifications-outline";
+              label = "updates";
               break;
             case "profile":
               iconName = focused ? "person" : "person-outline";
@@ -78,12 +87,22 @@ export default function DashboardTabs() {
               break;
           }
 
-          return <TabIcon name={iconName} label={label} focused={focused} color={focused ? "#FFAC1C" : "gray"} size={24} />;
+          return (
+            <TabIcon
+              iconLibrary={iconLibrary}
+              name={iconName}
+              label={label}
+              focused={focused}
+              color={focused ? "#FFAC1C" : "gray"}
+              size={24}
+            />
+          );
         },
       })}
     >
       <Tabs.Screen name="find-ride" component={FindRide} />
       <Tabs.Screen name="rides" component={Rides} />
+      <Tabs.Screen name="notifications" component={Notifications} />
       <Tabs.Screen name="profile" component={Profile} />
     </Tabs.Navigator>
   );

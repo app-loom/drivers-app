@@ -50,20 +50,21 @@ export default function FindRide({ navigation }) {
   };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <View className="gap-5 p-4">
         <Navbar navigation={navigation} />
 
         <View className="flex-row items-center justify-between p-5 bg-white border border-gray-200 rounded-2xl">
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-start gap-2">
             <FontAwesome name="rupee" size={22} color="#FFAC1C" />
-            <Text className="text-lg text-gray-800 font-interSemiBold">Total Earned</Text>
+            <Text className="text-xl text-gray-800 font-interSemiBold">Total Earned</Text>
           </View>
-          <Text className="text-lg text-gray-800 font-interSemiBold">₹ 0.00</Text>
+          <Text className="text-xl text-gray-800 font-interSemiBold">₹ 0.00</Text>
         </View>
       </View>
-
-      <DragableMap loading={loading} location={location} fetchLocation={fetchLocation} />
+      <View className="flex-1 p-2" >
+        <DragableMap loading={loading} location={location} fetchLocation={fetchLocation} />
+      </View>
       <View className="px-4 pt-5">
         <TouchableOpacity className="btn-primary" onPress={() => setOpenAvailRides(true)}>
           <Text className="btn-text">Find a Ride</Text>

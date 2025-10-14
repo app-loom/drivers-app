@@ -21,7 +21,7 @@ export default function DragableMap({ location, loading, fetchLocation }) {
   }
 
   return (
-    <View className="flex-1 px-4 pb-4 overflow-hidden border border-gray-200 rounded-2xl">
+    <View className="flex-1 overflow-hidden border border-gray-200 rounded-2xl">
       {loading ? (
         <View className="items-center justify-center flex-1">
           <ActivityIndicator size="large" color="#FFAC1C" />

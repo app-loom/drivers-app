@@ -14,7 +14,7 @@ const RideCard = ({ ride }) => {
     <TouchableOpacity className="p-4 mx-4 mb-4 bg-white shadow-md rounded-xl" activeOpacity={0.8}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-lg text-gray-900 font-interSemiBold">
+          <Text className="text-xl text-gray-800 font-interSemiBold">
             {ride.from} → {ride.to}
           </Text>
           <Text className="mt-1 text-gray-500">
@@ -37,7 +37,7 @@ const RideCard = ({ ride }) => {
 
 export default function Rides() {
   return (
-    <SafeAreaView className="flex-1 pt-2 bg-gray-50">
+    <SafeAreaView className="flex-1 pt-5 bg-gray-50">
       <Text className="mb-4 text-2xl text-center text-gray-900 font-interBold">Ride History</Text>
 
       <FlatList data={rideData} keyExtractor={(item) => item.id} renderItem={({ item }) => <RideCard ride={item} />} contentContainerStyle={{ paddingBottom: 30 }} showsVerticalScrollIndicator={false} />
