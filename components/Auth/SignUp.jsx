@@ -1,13 +1,15 @@
+import { BASE_URL } from "@/constants/api-data";
 import { useUserStore } from "@/store/user.store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import { BASE_URL } from "@/constants/data";
 
 export default function SignUp({ navigation }) {
   const setUserDetails = useUserStore((state) => state.setUserDetails);
+  const setToken = useUserStore((state) => state.setToken);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,9 +19,26 @@ export default function SignUp({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = () => {
-    if (password !== confirmPassword) {
+    if (!fullName || !mobileNumber || !password || !confirmPassword) {
       Toast.show({
         type: "error",
+        text1: "Enter all the fields",
+        text2: "Please make sure you've completed all the fields",
+        text1Style: {
+          fontSize: 12,
+          fontWeight: 400,
+        },
+        text2Style: {
+          fontSize: 11,
+          fontWeight: 400,
+        },
+      });
+      return;
+    }
+
+      if (password !== confirmPassword) {
+        Toast.show({
+          type: "error",
         text1: "Password mismatch",
         text2: "Please make sure both passwords are the same.",
         text1Style: {
@@ -35,18 +54,25 @@ export default function SignUp({ navigation }) {
     }
 
     setIsLoading(true);
+    
     const bodyTxt = {
       fullName,
       mobileNumber,
       password,
+      otp : '1234' // Should remove this after implementing the otp validation
     };
+
     const config = {};
 
     axios
       .post(`${BASE_URL}/user/register`, bodyTxt, config)
       .then((res) => {
         if (res.data.success) {
-          setUserDetails(res.data.data);
+          AsyncStorage.setItem("user", JSON.stringify(res.data.user));
+          AsyncStorage.setItem("token", JSON.stringify(res.data.token));
+          console.log(res)
+          setUserDetails(res.data.user);
+          setToken(res.data.token)
           setIsLoading(false);
           navigation.navigate("verify-otp");
         } else {
@@ -88,7 +114,6 @@ export default function SignUp({ navigation }) {
           className="my-5 btn-primary"
           onPress={() => handleSignUp()}
           // onPress={() => navigation.navigate("verify-otp")}
-          // onPress={signUp}
         >
           <Text className="btn-text">{isLoading ? "Creating your account..." : "Sign Up"}</Text>
         </TouchableOpacity>

@@ -10,6 +10,7 @@ import ArrivalInfo from "./ui/CustomerInteractions/ArrivalInfo";
 
 export default function FindRide({ navigation }) {
   const setIsLocationEnabled = useUserStore((state) => state.setIsLocationEnabled);
+  const userDetails = useUserStore((state) => state.userDetails);
 
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,8 @@ export default function FindRide({ navigation }) {
   useEffect(() => {
     fetchLocation();
   }, []);
+
+  console.log(userDetails)
 
   const pickup1 = {
     customerName: "Tester",

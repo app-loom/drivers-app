@@ -5,14 +5,17 @@ import { useUserStore } from "@/store/user.store";
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from "react-native-confirmation-code-field";
 import Toast from "react-native-toast-message";
 import axios from "axios";
+import { BASE_URL } from "@/constants/api-data";
 
 const CELL_COUNT = 4;
 
 export default function VerifyOtp({ navigation }) {
   const setUserDetails = useUserStore((state) => state.setUserDetails);
   const userDetails = useUserStore((state) => state.userDetails);
-  const [isVerifying, setIsVerifying] = useState(false);
+  const token = useUserStore((state) => state.token);
   
+  const [isVerifying, setIsVerifying] = useState(false);
+
   const [value, setValue] = useState("");
 
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
@@ -22,42 +25,70 @@ export default function VerifyOtp({ navigation }) {
   });
 
   const handleVerify = () => {
-    setIsVerifying(true)
-    const config = {};
-    const bodyTxt = { mobileNumber : userDetails?.mobileNumber, otp : value };
-    axios.post('http://localhost:5000/user/verifyotp', bodyTxt,  config ).then((res) => {
-        console.log(res.data)
-        if(res.data.success){
-            setUserDetails(res.data.data);
-            navigation.navigate('complete-profile')
-        } else {
-            Toast.show({
-              type: "error",
-              text1: "Verification Failed",
-              text2: res.data.message,
-              text2Style: {
-                fontSize: 12,
-                fontWeight: 400,
-              },
-            });
-        }
-    }).catch(() => {
+    if (!value) {
       Toast.show({
         type: "error",
-        text2: res.data.message,
-        text2Style: {
-          fontSize: 12,
-          fontWeight: 400,
-        },
+        text1: "Please enter the OTP",
+        text2Style: { fontSize: 12, fontWeight: 400 },
       });
-    setIsVerifying(false)
-    }).finally(() => {
+      return;
+    }
+
+    setIsVerifying(true);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const bodyTxt = { mobileNumber: userDetails?.mobileNumber, otp: value, regiStatus: "verif" };
+
+    axios
+      .post(`${BASE_URL}/user/verifyotp`, bodyTxt, config)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.success) {
+          setUserDetails(res.data.data);
+          Toast.show({
+            type: "success",
+            text1: "Verification Success",
+            text2: res.data.message,
+            text2Style: { fontSize: 12, fontWeight: 400 },
+          });
+          setTimeout(() => {
+            navigation.navigate("complete-profile");
+          }, 1500);
+        } else {
+          Toast.show({
+            type: "error",
+            text1: "Verification Failed",
+            text2: res.data.message,
+            text2Style: { fontSize: 12, fontWeight: 400 },
+          });
+        }
+      })
+      .catch((err) => {
+        Toast.show({
+          type: "error",
+          text1: "Verification Failed",
+          text2: err.response?.data?.message || "Something went wrong",
+          text2Style: { fontSize: 12, fontWeight: 400 },
+        });
+      })
+      .finally(() => {
         setIsVerifying(false);
-    })
+      });
   };
 
   const handleResend = () => {
-    console.log("Resend OTP pressed");
+    Toast.show({
+      type: "info",
+      text1: "OTP Resent",
+      text2: "Please check your mobile for the new OTP",
+      text2Style: { fontSize: 12, fontWeight: 400 },
+    });
   };
 
   return (
@@ -97,8 +128,8 @@ export default function VerifyOtp({ navigation }) {
 
         <TouchableOpacity
           className="btn-primary"
-          // onPress={handleVerify}
-          onPress={() => navigation.navigate("complete-profile")}
+          onPress={handleVerify}
+          // onPress={() => navigation.navigate("complete-profile")}
         >
           <Text className="btn-text">{isVerifying ? "Verifying..." : "Verify"}</Text>
         </TouchableOpacity>

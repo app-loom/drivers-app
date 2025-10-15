@@ -1,4 +1,3 @@
-export const BASE_URL = "http://:5000";
 
 export const detailedMapStyle = [
   { featureType: "all", elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
@@ -74,4 +73,41 @@ export const user = {
   drivingLicence: "TN-DL-20394857",
   isVerified: true,
   regiStatus: "Active",
+};
+
+export const notificationsData = {
+  today: [
+    {
+      id: "1",
+      title: "New Ride Request",
+      message: "You have a new ride request to Downtown.",
+      time: "10:45 AM",
+      icon: "car",
+    },
+    {
+      id: "2",
+      title: "Payment Received",
+      message: "Your payment for the last ride was successful.",
+      time: "8:12 AM",
+      icon: "card",
+    },
+  ],
+  yesterday: [
+    {
+      id: "3",
+      title: "Ride Cancelled",
+      message: "Your scheduled ride was cancelled by the driver.",
+      time: "7:25 PM",
+      icon: "close-circle",
+    },
+  ],
+  earlier: [
+    {
+      id: "4",
+      title: "Welcome!",
+      message: "Thanks for joining our community. Enjoy safe rides!",
+      time: "Oct 10",
+      icon: "happy",
+    },
+  ],
 };
