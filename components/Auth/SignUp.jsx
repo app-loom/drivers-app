@@ -2,7 +2,7 @@ import { BASE_URL } from "@/constants/api-data";
 import { useUserStore } from "@/store/user.store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
@@ -59,7 +59,8 @@ export default function SignUp({ navigation }) {
       fullName,
       mobileNumber,
       password,
-      otp : '1234' // Should remove this after implementing the otp validation
+      regiStatus: "verif",
+      otp: "1234", // Should remove this after implementing the otp validation
     };
 
     const config = {};
@@ -68,9 +69,7 @@ export default function SignUp({ navigation }) {
       .post(`${BASE_URL}/user/register`, bodyTxt, config)
       .then((res) => {
         if (res.data.success) {
-          AsyncStorage.setItem("user", JSON.stringify(res.data.user));
           AsyncStorage.setItem("token", JSON.stringify(res.data.token));
-          console.log(res)
           setUserDetails(res.data.user);
           setToken(res.data.token)
           setIsLoading(false);
@@ -99,7 +98,7 @@ export default function SignUp({ navigation }) {
     <SafeAreaView className="bg-white auth-container">
       <Toast />
       <View className="items-center justify-center gap-3 mb-4">
-        <Text className="text-4xl text-gray-800 font-interSemiBold">Create Account</Text>
+        <Text className="text-3xl text-gray-800 font-interSemiBold">Create Account</Text>
         <Text className="text-lg text-gray-500">Join us and start earning today!</Text>
       </View>
 
@@ -112,8 +111,8 @@ export default function SignUp({ navigation }) {
         </View>
         <TouchableOpacity
           className="my-5 btn-primary"
-          onPress={() => handleSignUp()}
-          // onPress={() => navigation.navigate("verify-otp")}
+          // onPress={() => handleSignUp()}
+          onPress={() => navigation.navigate("verify-otp")}
         >
           <Text className="btn-text">{isLoading ? "Creating your account..." : "Sign Up"}</Text>
         </TouchableOpacity>

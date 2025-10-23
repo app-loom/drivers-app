@@ -4,8 +4,6 @@ import { BASE_URL } from "@/constants/api-data";
 
 export const getToken = () => AsyncStorage.getItem("token").then(t => t?.replace(/"/g, ""));
 
-export const getUser = () => AsyncStorage.getItem("user").then(t => t?.replace(/"/g, ""));
-
 export const getUserData = async () => {
   const token = await getToken();
   if (!token) return null;

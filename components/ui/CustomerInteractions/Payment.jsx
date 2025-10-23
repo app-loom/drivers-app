@@ -1,15 +1,15 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function Payment({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="justify-between flex-1 p-6">
         <View className="mt-10">
-          <Text className="text-4xl text-center text-gray-900 font-interSemiBold">Collect Cash</Text>
+          <Text className="text-3xl text-center text-gray-900 font-interSemiBold">Collect Cash</Text>
         </View>
 
         <View className="gap-3 mt-10">

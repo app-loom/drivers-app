@@ -41,9 +41,7 @@ export default function FindRide({ navigation }) {
   useEffect(() => {
     fetchLocation();
   }, []);
-
-  console.log(userDetails)
-
+  
   const pickup1 = {
     customerName: "Tester",
     pickup: "New Bustand, Thanjavur",
@@ -69,14 +67,14 @@ export default function FindRide({ navigation }) {
         <DragableMap loading={loading} location={location} fetchLocation={fetchLocation} />
       </View>
       <View className="px-4 pt-5">
-        <TouchableOpacity className="btn-primary" onPress={() => setOpenAvailRides(true)}>
+        <TouchableOpacity className="btn-primary" onPress={() => setOpenAvailRides(true)} disabled={userDetails?.isActingDriver}>
           <Text className="btn-text">Find a Ride</Text>
         </TouchableOpacity>
       </View>
       <Modal animationType="fade" transparent={true} visible={openAvailRides} onRequestClose={() => setOpenAvailRides(false)}>
         <View className="justify-end flex-1 bg-black/30">
           <View className="p-6 bg-white rounded-t-3xl">
-            <Text className="mb-2 text-2xl text-gray-800 font-interSemiBold">Ride Request</Text>
+            <Text className="mb-2 text-2xl text-gray-800 font-interSemiBold" >Ride Request</Text>
 
             <View className="mb-4">
               <Text className="text-gray-700 font-interMedium">

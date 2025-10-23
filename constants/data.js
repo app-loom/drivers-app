@@ -111,3 +111,12 @@ export const notificationsData = {
     },
   ],
 };
+
+
+ export  const menuItems = [
+    { title: "Profile Details", route: "profile-details", icon: "person-circle-outline" },
+    { title: "Bank Information", route: "bank-info", icon: "card-outline" },
+    { title: "Documents", route: "view-documents", icon: "document-text-outline" },
+    { title: "Help Center", route: "help-center", icon: "help-circle-outline" },
+    { title: "Privacy Policy", route: "privacy-policy", icon: "shield-checkmark-outline" },
+  ];

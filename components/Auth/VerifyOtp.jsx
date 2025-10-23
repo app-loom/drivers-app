@@ -1,11 +1,11 @@
+import { BASE_URL } from "@/constants/api-data";
+import { useUserStore } from "@/store/user.store";
+import axios from "axios";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useUserStore } from "@/store/user.store";
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from "react-native-confirmation-code-field";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import axios from "axios";
-import { BASE_URL } from "@/constants/api-data";
 
 const CELL_COUNT = 4;
 
@@ -43,7 +43,7 @@ export default function VerifyOtp({ navigation }) {
       },
     };
 
-    const bodyTxt = { mobileNumber: userDetails?.mobileNumber, otp: value, regiStatus: "verif" };
+    const bodyTxt = { mobileNumber: userDetails?.mobileNumber, otp: value, regiStatus: "comprof", };
 
     axios
       .post(`${BASE_URL}/user/verifyotp`, bodyTxt, config)
@@ -96,7 +96,7 @@ export default function VerifyOtp({ navigation }) {
       <Toast />
       <View className="justify-center flex-1 px-6">
         <View className="items-center justify-center gap-2 mx-auto mb-3">
-          <Text className="text-4xl text-gray-800 font-interSemiBold">Verify Code</Text>
+          <Text className="text-3xl text-gray-800 font-interSemiBold">Verify Code</Text>
           <Text className="px-6 text-xl text-center text-gray-500">Please enter the code we just sent to your mobile number</Text>
           <Text className="text-primary font-interRegular">{userDetails?.mobileNumber}</Text>
         </View>
@@ -128,8 +128,8 @@ export default function VerifyOtp({ navigation }) {
 
         <TouchableOpacity
           className="btn-primary"
-          onPress={handleVerify}
-          // onPress={() => navigation.navigate("complete-profile")}
+          // onPress={handleVerify}
+          onPress={() => navigation.navigate("complete-profile")}
         >
           <Text className="btn-text">{isVerifying ? "Verifying..." : "Verify"}</Text>
         </TouchableOpacity>

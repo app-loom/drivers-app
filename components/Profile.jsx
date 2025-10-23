@@ -1,69 +1,90 @@
-import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { menuItems, user } from "@/constants/data";
+import { useUserStore } from "@/store/user.store";
 import { Ionicons } from "@expo/vector-icons";
-import { user } from "@/constants/data";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { FlatList, Image, Text, TouchableOpacity, View, Modal } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import {useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile() {
+  const navigation = useNavigation();
+  const setUserDetails = useUserStore((state) => state.setUserDetails);
+  const userDetails = useUserStore((state) => state.userDetails);
+  const setToken = useUserStore((state) => state.setToken);
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      setToken(null);
+      setUserDetails(null);
+      setModalVisible(false);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
+  const profileMenus = ({ item }) => (
+    <TouchableOpacity onPress={() => navigation.navigate(item.route)} className="flex-row items-center justify-between p-5 border-b border-gray-100 rounded-2xl">
+      <View className="flex-row items-center gap-3">
+        <Ionicons name={item.icon} size={22} color="#FFAC1C" />
+        <Text className="text-lg text-gray-800 font-interRegular">{item.title}</Text>
+      </View>
+      <Ionicons name="chevron-forward" size={20} color="#FFAC1C" />
+    </TouchableOpacity>
+  );
+  
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <ScrollView className="p-5" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
-        <View className="items-center mt-6 mb-8">
-          <Image source={{ uri: user.profilePicture }} className="mb-4 border-4 rounded-full w-28 h-28 border-primary" />
-          <Text className="text-3xl font-interSemiBold text-primary">{user.fullName}</Text>
+      <FlatList
+        data={menuItems}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={profileMenus}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <View className="items-center px-5 mt-6 mb-8">
+            <Image source={{ uri: user.profilePicture }} className="mb-4 border-4 rounded-full w-28 h-28 border-primary" />
+            <Text className="text-3xl text-gray-800 font-interSemiBold">{userDetails?.fullName}</Text>
+            <View className="flex-row items-center mt-2 space-x-2">
+              <Ionicons name={user.isVerified ? "checkmark-circle" : "close-circle"} size={18} color={user.isVerified ? "#2ECC71" : "#E74C3C"} />
+              <Text className={`text-base ${user.isVerified ? "text-green-600" : "text-red-500"}`}>{user.isVerified ? "Verified Driver" : "Not Verified"}</Text>
+            </View>
+          </View>
+        }
+        contentContainerStyle={{ paddingBottom: 40, backgroundColor: "#fff" }}
+      />
+      <TouchableOpacity  className="flex-row items-center justify-between p-5 border-b border-gray-100 rounded-2xl" onPress={() => setModalVisible(true)}>
+        <View className="flex-row items-center gap-3">
+          <Ionicons name={'log-out-outline'} size={22} color="#FFAC1C" />
+          <Text className="text-lg text-gray-800 font-interRegular">Logout</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={20} color="#FFAC1C" />
+      </TouchableOpacity>
 
-          <View className="flex-row items-center mt-2 space-x-2">
-            <Ionicons name={user.isVerified ? "checkmark-circle" : "close-circle"} size={18} color={user.isVerified ? "#2ECC71" : "#E74C3C"} />
-            <Text className={`text-base ${user.isVerified ? "text-green-600" : "text-red-500"}`}>{user.isVerified ? "Verified Driver" : "Not Verified"}</Text>
+      <Modal animationType="fade" transparent={true} visible={modalVisible} onRequestClose={handleCancel}>
+        <View className="items-center justify-center flex-1 bg-black/50">
+          <View className="items-center p-6 bg-white shadow-lg rounded-2xl">
+            <Text className="mb-6 text-lg text-center font-interSemiBold">Are you sure you want to log out?</Text>
+
+            <View className="flex-row gap-3">
+              <TouchableOpacity onPress={handleCancel} className="px-5 py-2 bg-gray-300 rounded-xl">
+                <Text className="text-base text-gray-800 font-interSemiBold">Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handleLogout} className="px-5 py-2 bg-red-500 rounded-xl">
+                <Text className="text-base text-white font-interSemiBold">Logout</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-
-        <View className="p-5 mb-6 bg-gray-100 shadow-sm rounded-2xl">
-          <Text className="mb-3 text-xl font-interSemiBold text-primary">Account Details</Text>
-
-          {[
-            ["Mobile Number", user.mobileNumber],
-            ["Email", user.email],
-            ["Gender", user.gender],
-            ["City", user.city],
-            ["Status", user.regiStatus],
-          ].map(([label, value], i) => (
-            <View key={i} className="flex-row justify-between py-1 last:border-0">
-              <Text className="text-base text-gray-700 font-interRegular">{label}:</Text>
-              <Text className="text-base text-gray-900 font-interMedium">{value}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View className="p-5 mb-6 bg-gray-100 shadow-sm rounded-2xl">
-          <Text className="mb-3 text-xl font-interSemiBold text-primary">Vehicle Details</Text>
-
-          {[
-            ["Car Name", user.carName],
-            ["Car Number", user.carNo],
-          ].map(([label, value], i) => (
-            <View key={i} className="flex-row justify-between py-1 last:border-0">
-              <Text className="text-base text-gray-700 font-interRegular">{label}:</Text>
-              <Text className="text-base text-gray-900 font-interMedium">{value}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View className="p-5 mb-6 bg-gray-100 shadow-sm rounded-2xl">
-          <Text className="mb-3 text-xl font-interSemiBold text-primary">Documents</Text>
-
-          {[
-            ["Bank Account", user.bankAccountDetails],
-            ["Driving Licence", user.drivingLicence],
-          ].map(([label, value], i) => (
-            <View key={i} className="flex-row justify-between py-1 last:border-0">
-              <Text className="text-base text-gray-700 font-interRegular">{label}:</Text>
-              <Text className="text-base text-gray-900 font-interMedium">{value}</Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      </Modal>
     </SafeAreaView>
   );
+
 }

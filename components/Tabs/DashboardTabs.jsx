@@ -8,6 +8,7 @@ import Profile from "@/components/Profile";
 import Rides from "@/components/Rides";
 import FindRide from "@/components/FindRide";
 import Notifications from "@/components/Notifications";
+import ProfileStackNavigation from "../navigation/ProfileNavigation";
 
 const Tabs = createBottomTabNavigator();
 
@@ -81,7 +82,7 @@ export default function DashboardTabs() {
               iconName = focused ? 'notifications' :  "notifications-outline";
               label = "updates";
               break;
-            case "profile":
+            case "profile-screen":
               iconName = focused ? "person" : "person-outline";
               label = "Profile";
               break;
@@ -103,7 +104,7 @@ export default function DashboardTabs() {
       <Tabs.Screen name="find-ride" component={FindRide} />
       <Tabs.Screen name="rides" component={Rides} />
       <Tabs.Screen name="notifications" component={Notifications} />
-      <Tabs.Screen name="profile" component={Profile} />
+      <Tabs.Screen name="profile-screen" component={ProfileStackNavigation} />
     </Tabs.Navigator>
   );
 }

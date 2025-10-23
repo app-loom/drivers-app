@@ -1,11 +1,15 @@
+import { BASE_URL } from "@/constants/api-data";
 import { useUserStore } from "@/store/user.store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 
 export default function SignIn({ navigation }) {
   const setUserDetails = useUserStore((state) => state.setUserDetails);
+  const setToken = useUserStore((state) => state.setToken);
   const userDetails = useUserStore((state) => state.userDetails);
 
   const [mobileNumber, setMobileNumber] = useState("");
@@ -36,12 +40,23 @@ export default function SignIn({ navigation }) {
     };
     const config = {};
     axios
-      .post(`http://localhost:5000/user/login`, bodyTxt, config)
+      .post(`${BASE_URL}/user/login`, bodyTxt, config)
       .then((res) => {
         if (res.data.success) {
+          AsyncStorage.setItem("token", JSON.stringify(res.data.token));
           setUserDetails(res.data.data);
+          setToken(res.data.token)
           setIsLoading(false);
-          navigation.navigate("verify-otp");
+          if(!userDetails?.isVerified){
+            Toast.show({
+              type: "info",
+              text2: 'Your account is still in verification stage.',
+              text2Style: {
+                fontSize: 12,
+                fontWeight: 400,
+              }
+            })
+          }
         } else {
           Toast.show({
             type: "error",
@@ -64,8 +79,9 @@ export default function SignIn({ navigation }) {
 
   return (
     <SafeAreaView className="gap-5 bg-white auth-container">
+      <Toast/>
       <View className="items-center justify-center text-center">
-        <Text className="mb-2 text-4xl text-gray-800 font-interSemiBold">Sign In</Text>
+        <Text className="mb-2 text-3xl text-gray-800 font-interSemiBold">Sign In</Text>
         <Text className="text-xl text-gray-500 font-interRegular">Hi! Welcome back, you've been missed</Text>
       </View>
 
@@ -83,8 +99,7 @@ export default function SignIn({ navigation }) {
         </Text>
 
         <TouchableOpacity
-          //   onPress={handleSignIn}
-          onPress={() => navigation.replace("dashboard")}
+            onPress={handleSignIn}
           className="mt-5 btn-primary"
         >
           <Text className="btn-text">{isLoading ? "Signing in" : "Sign In"}</Text>

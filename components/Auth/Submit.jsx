@@ -8,7 +8,7 @@ export default function Submit() {
         <SafeAreaView className="flex-1">
             <View className="items-center justify-center flex-1 gap-2 px-4">
                 <Ionicons name="checkmark-circle" size={100} color="#FFAC1C" />
-                <Text className="text-4xl text-center text-gray-800 font-interSemiBold">
+                <Text className="text-3xl text-center text-gray-800 font-interSemiBold">
                     Application Submitted for Verification
                 </Text>
 

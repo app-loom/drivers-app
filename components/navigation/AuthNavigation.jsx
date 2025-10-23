@@ -12,14 +12,15 @@ import Home from '../Home';
 
 const Stack = createNativeStackNavigator();
 
-export default function AuthNavigation() {
+export default function AuthNavigation({ initialRoute = "home" }) {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName={initialRoute}
     >
-    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="sign-in" component={SignIn} />
       <Stack.Screen name="sign-up" component={SignUp} />
       <Stack.Screen name="verify-otp" component={VerifyOtp} />

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from "react-native-confirmation-code-field";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import axios from "axios";
 
 const CELL_COUNT = 4;
 
@@ -70,7 +69,7 @@ export default function CustomerOtp({ navigation }) {
       <Toast />
       <View className="justify-center flex-1 px-6">
         <View className="items-center justify-center gap-2 mx-auto mb-3">
-          <Text className="text-4xl text-gray-800 font-interSemiBold">OTP Verification</Text>
+          <Text className="text-3xl text-gray-800 font-interSemiBold">OTP Verification</Text>
           <Text className="px-6 text-xl text-center text-gray-500">Enter Customer's OTP</Text>
           <Text className="px-6 text-center text-gray-400">We sent a PIN to your customer’s mobile number</Text>
           <Text className="text-primary font-interRegular">{customerNumber}</Text>
