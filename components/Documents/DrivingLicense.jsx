@@ -38,10 +38,10 @@ export default function DrivingLicense({ navigation }) {
   };
 
   const handleDrivingLicense = () => {
-    // if (!frontImage || !backImage || !drivingLicenceNo) {
-    //   Alert.alert("Error", "Please complete all the fields");
-    //   return;
-    // }
+    if (!frontImage || !backImage || !drivingLicenseNo) {
+      Alert.alert("Error", "Please complete all the fields");
+      return;
+    }
 
     const config = {
       headers: {
@@ -51,8 +51,8 @@ export default function DrivingLicense({ navigation }) {
     };
 
     const drivingLicence = {
-      frontImage,
-      backImage,
+      frontImage : frontImage || 'testurl.com',
+      backImage : backImage || 'testurl.com',
       drivingLicenseNo,
     };
     

@@ -128,8 +128,8 @@ export default function VerifyOtp({ navigation }) {
 
         <TouchableOpacity
           className="btn-primary"
-          // onPress={handleVerify}
-          onPress={() => navigation.navigate("complete-profile")}
+          onPress={handleVerify}
+          // onPress={() => navigation.navigate("complete-profile")}
         >
           <Text className="btn-text">{isVerifying ? "Verifying..." : "Verify"}</Text>
         </TouchableOpacity>

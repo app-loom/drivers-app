@@ -39,10 +39,10 @@ export default function BankDetails({ navigation }) {
   };
 
   const handleBankDetails = () => {
-    // if (!image || !bankName || !accountNumber || !ifscCode) {
-    //   Alert.alert("Error", "Please complete all the fields");
-    //   return;
-    // }
+    if (!image || !bankName || !accountNumber || !ifscCode) {
+      Alert.alert("Error", "Please complete all the fields");
+      return;
+    }
 
     const config = {
       headers: {

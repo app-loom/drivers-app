@@ -48,7 +48,7 @@ export default function Payment({ navigation }) {
           </View>
         </View>
 
-        <TouchableOpacity className="py-4 mt-10 rounded-full bg-primary" onPress={() => navigation.navigate("find-ride")}>
+        <TouchableOpacity className="py-4 mt-10 rounded-full bg-primary" onPress={() => navigation.navigate("dashboard")}>
           <Text className="text-lg text-center text-white font-interSemiBold">Cash Collected</Text>
         </TouchableOpacity>
       </View>

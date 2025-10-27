@@ -36,9 +36,9 @@ export default function SignUp({ navigation }) {
       return;
     }
 
-      if (password !== confirmPassword) {
-        Toast.show({
-          type: "error",
+    if (password !== confirmPassword) {
+      Toast.show({
+        type: "error",
         text1: "Password mismatch",
         text2: "Please make sure both passwords are the same.",
         text1Style: {
@@ -71,7 +71,7 @@ export default function SignUp({ navigation }) {
         if (res.data.success) {
           AsyncStorage.setItem("token", JSON.stringify(res.data.token));
           setUserDetails(res.data.user);
-          setToken(res.data.token)
+          setToken(res.data.token);
           setIsLoading(false);
           navigation.navigate("verify-otp");
         } else {
@@ -111,8 +111,8 @@ export default function SignUp({ navigation }) {
         </View>
         <TouchableOpacity
           className="my-5 btn-primary"
-          // onPress={() => handleSignUp()}
-          onPress={() => navigation.navigate("verify-otp")}
+          onPress={() => handleSignUp()}
+          // onPress={() => navigation.navigate("verify-otp")}
         >
           <Text className="btn-text">{isLoading ? "Creating your account..." : "Sign Up"}</Text>
         </TouchableOpacity>

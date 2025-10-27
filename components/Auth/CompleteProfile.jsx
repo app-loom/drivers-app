@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import { Checkbox } from "expo-checkbox";
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
@@ -22,15 +22,15 @@ export default function CompleteProfile({ navigation }) {
   const [accepted, setAccepted] = useState(false);
 
   const handleContinue = () => {
-    // if (!gender || !city || !age || !exp || !skill) {
-    //   Alert.alert("Error", "Please complete all the fields");
-    //   return;
-    // }
+    if (!gender || !city || !age || !exp || !skill) {
+      Alert.alert("Error", "Please complete all the fields");
+      return;
+    }
 
-    // if (!accepted) {
-    //   Alert.alert("Error", "Please accept the Terms & Conditions to proceed");
-    //   return;
-    // }
+    if (!accepted) {
+      Alert.alert("Error", "Please accept the Terms & Conditions to proceed");
+      return;
+    }
 
     const config = {
       headers: {

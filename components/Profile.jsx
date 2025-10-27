@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {useState } from "react";
+import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile() {
@@ -57,15 +57,17 @@ export default function Profile() {
             </View>
           </View>
         }
+        ListFooterComponent={
+          <TouchableOpacity className="flex-row items-center justify-between p-5 border-b border-gray-100 rounded-2xl" onPress={() => setModalVisible(true)}>
+            <View className="flex-row items-center gap-3">
+              <Ionicons name={"log-out-outline"} size={22} color="#FFAC1C" />
+              <Text className="text-lg text-gray-800 font-interRegular">Logout</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#FFAC1C" />
+          </TouchableOpacity>
+        }
         contentContainerStyle={{ paddingBottom: 40, backgroundColor: "#fff" }}
       />
-      <TouchableOpacity  className="flex-row items-center justify-between p-5 border-b border-gray-100 rounded-2xl" onPress={() => setModalVisible(true)}>
-        <View className="flex-row items-center gap-3">
-          <Ionicons name={'log-out-outline'} size={22} color="#FFAC1C" />
-          <Text className="text-lg text-gray-800 font-interRegular">Logout</Text>
-        </View>
-        <Ionicons name="chevron-forward" size={20} color="#FFAC1C" />
-      </TouchableOpacity>
 
       <Modal animationType="fade" transparent={true} visible={modalVisible} onRequestClose={handleCancel}>
         <View className="items-center justify-center flex-1 bg-black/50">

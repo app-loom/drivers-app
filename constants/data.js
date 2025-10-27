@@ -1,4 +1,3 @@
-
 export const detailedMapStyle = [
   { featureType: "all", elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
   { featureType: "all", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
@@ -112,11 +111,29 @@ export const notificationsData = {
   ],
 };
 
+export const menuItems = [
+  { title: "Profile Details", route: "profile-details", icon: "person-circle-outline" },
+  { title: "Bank Information", route: "bank-info", icon: "card-outline" },
+  { title: "Documents", route: "view-documents", icon: "document-text-outline" },
+  { title: "Help Center", route: "help-center", icon: "help-circle-outline" },
+  { title: "Privacy Policy", route: "privacy-policy", icon: "shield-checkmark-outline" },
+];
 
- export  const menuItems = [
-    { title: "Profile Details", route: "profile-details", icon: "person-circle-outline" },
-    { title: "Bank Information", route: "bank-info", icon: "card-outline" },
-    { title: "Documents", route: "view-documents", icon: "document-text-outline" },
-    { title: "Help Center", route: "help-center", icon: "help-circle-outline" },
-    { title: "Privacy Policy", route: "privacy-policy", icon: "shield-checkmark-outline" },
-  ];
+export const faqs = [
+  {
+    question: "How do I reset my password?",
+    answer: "Go to your Profile → Account Settings → Change Password. You’ll receive an OTP to confirm the change.",
+  },
+  {
+    question: "How can I update my account details?",
+    answer: "Navigate to Profile → Edit Account Details. You can update your name, mobile number, or address there.",
+  },
+  {
+    question: "I didn’t receive my OTP. What should I do?",
+    answer: "Check your internet connection and make sure your number is correct. If the issue continues, contact support.",
+  },
+  {
+    question: "How do I contact customer support?",
+    answer: "You can reach out to us via email at support@yourapp.com or through the in-app chat feature.",
+  },
+];

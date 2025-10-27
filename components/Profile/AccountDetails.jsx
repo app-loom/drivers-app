@@ -1,8 +1,9 @@
-import { useUserStore } from '@/store/user.store';
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useUserStore } from "@/store/user.store";
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Feather from "@expo/vector-icons/Feather";
 
 export default function AccountDetails({ navigation }) {
   const userDetails = useUserStore((state) => state.userDetails);
@@ -15,10 +16,10 @@ export default function AccountDetails({ navigation }) {
     );
   }
 
-  const formatBoolean = (value) => (value ? 'Yes' : 'No');
+  const formatBoolean = (value) => (value ? "Yes" : "No");
 
   const handleEditProfile = () => {
-    navigation.navigate('EditProfile');
+    navigation.navigate("edit-profile");
   };
 
   return (
@@ -31,10 +32,10 @@ export default function AccountDetails({ navigation }) {
         </View>
 
         <View className="p-6 bg-white shadow-lg gap-7 rounded-2xl">
-          <View className='flex-row items-center justify-between' >
+          <View className="flex-row items-center justify-between">
             <Text className="mt-1 text-gray-500">View your profile information</Text>
-            <TouchableOpacity onPress={handleEditProfile} className="px-4 py-2 rounded-lg shadow bg-primary">
-              <Text className="font-semibold text-white">Edit Profile</Text>
+            <TouchableOpacity onPress={handleEditProfile} className="">
+              <Feather name="edit" size={20} color="#FFAC1C" />
             </TouchableOpacity>
           </View>
 

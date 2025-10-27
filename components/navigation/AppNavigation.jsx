@@ -27,7 +27,6 @@ export default function AppNavigation() {
       <Stack.Screen name="view-documents" component={ViewDocuments} />
       <Stack.Screen name="privacy-policy" component={PrivacyPolicy} />
       <Stack.Screen name="help-center" component={HelpCenter} />
-      {/* <Stack.Screen name="logout" component={Logout} /> */}
     </Stack.Navigator>
   )
 }
